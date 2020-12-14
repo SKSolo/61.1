@@ -1,0 +1,62 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+
+
+using namespace std;
+
+class ciag
+{
+	public:
+	int t[];
+	void policz();
+	
+};
+
+
+
+void ciag::policz()
+{
+	ifstream plik;
+	plik.open("c:\\ciagi.txt");
+	
+	string liczba;
+	int dlugosc,dlugosc_ciagu, roznica, stara_roznica;
+	
+	while(!plik.eof())
+	{
+ 	plik >> dlugosc;
+ 	for (int i=0; i<dlugosc_ciagu; i++)
+ 	{
+   		plik >> liczba;
+   	    t.push_back(liczba);
+   			 if (i==1) stara_roznica = t[1]-t[0];
+   			 if (i>1) 
+  		 {
+      	 int roznica = t[i] - t[i-1];
+      	 if (roznica != stara_roznica)
+    	  {
+          cout << "Zły ciąg!!!";
+       	  }
+   		 }
+ 	}
+	}	
+	
+	if(roznica==stara_roznica)
+	{
+		t.push_back(roznica);
+		
+		ofstream zapisz;
+		zapisz.open("c:\\zapisciag.txt");
+		zapisz<<t;
+		zapisz.close();
+	}
+}
+
+int main(int argc, char** argv) {
+	
+	ciag wywolaj;
+	wywolaj.policz();
+	return 0;
+}
